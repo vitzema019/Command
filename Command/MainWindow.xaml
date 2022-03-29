@@ -1,0 +1,62 @@
+﻿<Window x:Class="Command.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Command"
+        xmlns:vm="clr-namespace:Command.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="14*"/>
+            <ColumnDefinition Width="11*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="37*"/>
+        </Grid.RowDefinitions>
+
+        <UniformGrid Grid.Row="1">
+            <UniformGrid.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="2"/>
+                </Style>
+            </UniformGrid.Resources>
+            <Button Content="A" Command="{Binding GuessCharacterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+            <Button Content="B" Command="{Binding GuessCharacterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+            <Button Content="C" Command="{Binding GuessCharacterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+            <Button Content="D" Command="{Binding GuessCharacterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+            <Button Content="E" Command="{Binding GuessCharacterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+            <Button Content="F" Command="{Binding GuessCharacterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+            <Button Content="G" Command="{Binding GuessCharacterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+            <Button Content="H" Command="{Binding GuessCharacterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+            <Button Content="I" Command="{Binding GuessCharacterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+            <Button Content="J" Command="{Binding GuessCharacterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+            <Button Content="K" Command="{Binding GuessCharacterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+            <Button Content="L" Command="{Binding GuessCharacterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+            <Button Content="M" Command="{Binding GuessCharacterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+            <Button Content="N" Command="{Binding GuessCharacterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+            <Button Content="O" Command="{Binding GuessCharacterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+            <Button Content="P" Command="{Binding GuessCharacterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+            <Button Content="Q" Command="{Binding GuessCharacterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+            <Button Content="R" Command="{Binding GuessCharacterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+            <Button Content="S" Command="{Binding GuessCharacterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+            <Button Content="T" Command="{Binding GuessCharacterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+            <Button Content="U" Command="{Binding GuessCharacterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+            <Button Content="V" Command="{Binding GuessCharacterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+            <Button Content="W" Command="{Binding GuessCharacterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+            <Button Content="X" Command="{Binding GuessCharacterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+            <Button Content="Y" Command="{Binding GuessCharacterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+            <Button Content="Z" Command="{Binding GuessCharacterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+
+
+        </UniformGrid>
+        <Label Content="{Binding Word}" HorizontalAlignment="Left" Margin="151,68,0,0" VerticalAlignment="Top" Width="149" HorizontalContentAlignment="Center" FontSize="36" FontWeight="Normal" FontStyle="Normal" UseLayoutRounding="False"/>
+
+    </Grid>
+
+</Window>
