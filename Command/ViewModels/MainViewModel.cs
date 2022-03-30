@@ -17,8 +17,18 @@ namespace Command.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         private ObservableCollection<char> _usedChars;
-        private string _originalWord = "Karel";
-        public string _hiddenWord = "_____";
+        private string _originalWord;
+        public string OriginalWord
+        {
+            get { return _originalWord; }
+            set { _originalWord = value; NotifyPropertyChanged(); }
+        }
+        private string _hiddenword;
+        public string HiddenWord
+        {
+            get { return _hiddenword; }
+            set { _hiddenword = value; NotifyPropertyChanged(); }
+        }
         public ParametrizedRelayCommand<string> GuessCharacterCommand { get; set; }
 
         public MainViewModel()
@@ -29,6 +39,7 @@ namespace Command.ViewModels
                 {
                     if (!String.IsNullOrEmpty(value) && !_usedChars.Contains(value[0]))
                     {
+                        Guess(value[0]);
                         _usedChars.Add(value[0]);
                         GuessCharacterCommand.RaiseCanExecureChanged();
                     }
@@ -37,19 +48,40 @@ namespace Command.ViewModels
                 (p) => { 
                     return p == null ? true : !_usedChars.Contains(p[0]); }
                 );
+            OriginalWord = "Karel";
+            HiddenWord = Display(OriginalWord);
         }
 
-        public string Word
+        private string Display(string input)
         {
-            get
+            string displayversion = "";
+            for (int i = 0; i < input.Length; i++)
             {
-                return _hiddenWord;
+                displayversion += "_";
             }
-            set
+            return displayversion;
+
+        }
+
+        public void Guess (char input)
+        {
+            StringBuilder ch = new StringBuilder(HiddenWord);
+            int replace = 0;
+            for(int i = 0; i < _originalWord.Length; i++)
             {
-                _hiddenWord = value;
-                NotifyPropertyChanged();
+                char compare = _originalWord[i];
+                if(char.ToUpper(compare) == char.ToUpper(input))
+                {
+                    ch[i] = OriginalWord[i];
+                    replace++;
+                }
+            }
+            if(replace > 0)
+            {
+                HiddenWord = ch.ToString();
             }
         }
+
+
     }
 }

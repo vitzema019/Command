@@ -55,7 +55,9 @@
 
 
         </UniformGrid>
-        <Label Content="{Binding Word}" HorizontalAlignment="Left" Margin="151,68,0,0" VerticalAlignment="Top" Width="149" HorizontalContentAlignment="Center" FontSize="36" FontWeight="Normal" FontStyle="Normal" UseLayoutRounding="False"/>
+        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding HiddenWord}" TextAlignment="Center" VerticalAlignment="Center" FontSize="72" Height="96" FontFamily="Consolas">
+        </TextBlock>
+
 
     </Grid>
 
