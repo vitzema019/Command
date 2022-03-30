@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Command.ViewModels
 {
@@ -16,7 +17,7 @@ namespace Command.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        private ObservableCollection<char> _usedChars;
+       public ObservableCollection<char> usedChars;
         private string _originalWord;
         public string OriginalWord
         {
@@ -29,27 +30,36 @@ namespace Command.ViewModels
             get { return _hiddenword; }
             set { _hiddenword = value; NotifyPropertyChanged(); }
         }
+
+        private int _fail = 0;
+        public int Fail {
+            get { return _fail; }
+            set { _fail = value; NotifyPropertyChanged(); }
+        }
         public ParametrizedRelayCommand<string> GuessCharacterCommand { get; set; }
 
         public MainViewModel()
         {
-            _usedChars = new ObservableCollection<char> {};
+            usedChars = new ObservableCollection<char> {};
             GuessCharacterCommand = new ParametrizedRelayCommand<string>(
                 (value) =>
                 {
-                    if (!String.IsNullOrEmpty(value) && !_usedChars.Contains(value[0]))
+                    if (!String.IsNullOrEmpty(value) && !usedChars.Contains(value[0]))
                     {
                         Guess(value[0]);
-                        _usedChars.Add(value[0]);
+                        
+                        usedChars.Add(value[0]);
                         GuessCharacterCommand.RaiseCanExecureChanged();
+                        CheckStatus();
                     }
                 },
                 
                 (p) => { 
-                    return p == null ? true : !_usedChars.Contains(p[0]); }
+                    return p == null ? true : !usedChars.Contains(p[0]); }
                 );
             OriginalWord = "Karel";
             HiddenWord = Display(OriginalWord);
+            Fail = 8;
         }
 
         private string Display(string input)
@@ -57,7 +67,7 @@ namespace Command.ViewModels
             string displayversion = "";
             for (int i = 0; i < input.Length; i++)
             {
-                displayversion += "_";
+                displayversion += "-";
             }
             return displayversion;
 
@@ -80,6 +90,33 @@ namespace Command.ViewModels
             {
                 HiddenWord = ch.ToString();
             }
+            else
+            {
+                Fail--;
+            }
+        }
+
+        public void CheckStatus()
+        {
+            if(Fail == 0)
+            {
+                MessageBox.Show("Prohra", "Hangman", MessageBoxButton.OK, MessageBoxImage.Warning);
+                Restart();
+            }
+            else if(HiddenWord == OriginalWord)
+            {
+                MessageBox.Show("Výhra", "Hangman", MessageBoxButton.OK, MessageBoxImage.Warning);
+                Restart();
+            }
+            
+        }
+
+        public void Restart()
+        {
+            Fail = 8;
+            usedChars.Clear();
+            HiddenWord = Display(OriginalWord);
+            GuessCharacterCommand.RaiseCanExecureChanged();
         }
 
 
